@@ -2,14 +2,15 @@
 //  StateDetailTableViewController.swift
 //  Representative-master
 //
-//  Created by Eric Lanza on 1/16/19.
+//  Created by Austin Goetz on 10/2/19.
 //  Copyright © 2019 DevMtnStudent. All rights reserved.
 //
 
 import UIKit
 
 class StateDetailTableViewController: UITableViewController {
-    
+
+    // Computed property
     var representatives: [Representative] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -17,8 +18,9 @@ class StateDetailTableViewController: UITableViewController {
             }
         }
     }
+    
     var state: String?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -36,12 +38,14 @@ class StateDetailTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
         return representatives.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "representativeCell", for: indexPath) as? RepresentativeTableViewCell else { return UITableViewCell() }
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "detailVCCell", for: indexPath) as?
+        RepresentativeTableViewCell else {return UITableViewCell() }
+        
         cell.representative = representatives[indexPath.row]
 
         return cell
